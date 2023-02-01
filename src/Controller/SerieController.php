@@ -24,13 +24,15 @@ class SerieController extends AbstractController
     }
 
     #[Route('/{id}', name: '_serie', requirements: ['id' => '\d+'])]
-    public function serie(int $id = 1): Response
+    public function serie(
+        int $id,
+        SerieRepository $serieRepository
+    ): Response
     {
-        // TODO : recuperer une serie en bdd
+        $serie = $serieRepository->find($id);
+        $serie = $serieRepository->findOneBy(["id" => $id]);
         return $this->render('serie/serie.html.twig',
-            [
-                'id' => $id
-            ]
+            compact('serie')
         );
     }
 
