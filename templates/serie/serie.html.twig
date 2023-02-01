@@ -1,8 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <p>Une seule serie</p>
-    <p>ID = {{ id }}</p>
+    <h2>{{ serie.name }}</h2>
+    <div>{{ serie.overview }}</div>
+    <div>{{ serie.vote }}</div>
 {% endblock %}
 
 {% block title %}

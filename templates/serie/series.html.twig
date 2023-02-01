@@ -4,7 +4,9 @@
     <section class="series-list">
         {% for serie in series %}
             <article>
+                <a href="{{ path('serie_serie', {'id': serie.id}) }}">
                 <img src="{{ asset('img/posters/series/'~serie.poster) }}" alt="{{ serie.poster }}">
+                </a>
             </article>
         {% endfor %}
     </section>
