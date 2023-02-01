@@ -19,7 +19,7 @@ class SerieController extends AbstractController
     {
         $series = $serieRepository->findAll();
         return $this->render('serie/series.html.twig',
-            compact('series')
+            ['series' => $series]
         );
     }
 
