@@ -23,6 +23,18 @@ class SerieController extends AbstractController
         );
     }
 
+    #[Route('/avgsf', name: '_avgsf')]
+    public function avgsf(
+        SerieRepository $serieRepository
+    ): Response
+    {
+        $avgsf = $serieRepository->findAvgSFdql();
+        dump($avgsf);
+        return $this->render('serie/avgsf.html.twig',
+            ['avgsf' => $avgsf]
+        );
+    }
+
     #[Route('/{id}', name: '_serie', requirements: ['id' => '\d+'])]
     public function serie(
         Serie $id,

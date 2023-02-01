@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Serie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -37,6 +38,30 @@ class SerieRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    /**
+     * @return Serie
+     * @throws NonUniqueResultException
+     * @author D2WM146 - CDA 091
+     */
+    public function findAvgSF()
+    {
+        return $this->createQueryBuilder('s')
+            ->select('avg(s.vote)')
+            ->andWhere("s.genres like '%Sci-Fi%'")
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function findAvgSFdql()
+    {
+        $em = $this->getEntityManager();
+        $dql = "SELECT AVG(s.vote) as moyenne
+            FROM App\Entity\Serie s
+            WHERE s.genres LIKE '%Sci-Fi%'";
+        $req = $em->createQuery($dql);
+        return $req->getOneOrNullResult();
     }
 
 //    /**
